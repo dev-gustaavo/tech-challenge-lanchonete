@@ -1,0 +1,31 @@
+version: '3'
+services:
+
+  lanchonete_app:
+    image: lanchonete-app
+    container_name: lanchonete-app
+    build: .
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    networks:
+      - lanchonete-network
+    depends_on:
+      - mysql_db
+
+  mysql_db:
+    image: mysql:8
+    container_name: mysql-lanchonete-db
+    ports:
+      - 3307:3306
+    networks:
+      - lanchonete-network
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: lanchonete
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+
+networks:
+  lanchonete-network:

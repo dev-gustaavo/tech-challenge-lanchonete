@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: lanchonete
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3307/lanchonete
+    username: user
+    password: pass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 8080
