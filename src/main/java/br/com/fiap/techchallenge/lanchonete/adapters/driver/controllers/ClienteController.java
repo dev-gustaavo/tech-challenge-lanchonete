@@ -4,8 +4,8 @@ import br.com.fiap.techchallenge.lanchonete.adapters.dto.ClienteDTO;
 import br.com.fiap.techchallenge.lanchonete.core.application.usecases.IClienteUseCase;
 import br.com.fiap.techchallenge.lanchonete.core.domain.Cliente;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +21,15 @@ public class ClienteController {
     private final ObjectMapper mapper;
 
     @PostMapping
-    public ResponseEntity<Cliente> criarCliente(@RequestBody @Validated ClienteDTO clienteRequest) {
+    public ResponseEntity<Cliente> criarCliente(@RequestBody @Valid ClienteDTO clienteRequest) throws Exception {
         var clienteDomain = mapper.convertValue(clienteRequest, Cliente.class);
 
         return ResponseEntity.ok(clienteUseCase.save(clienteDomain));
+    }
+
+    @GetMapping("/{cpf}")
+    public ResponseEntity<Cliente> buscarClientePorCpf(@PathVariable(value = "cpf") String cpf) throws Exception {
+        return ResponseEntity.ok(clienteUseCase.buscarClientePorCpf(cpf));
     }
 
     @GetMapping
