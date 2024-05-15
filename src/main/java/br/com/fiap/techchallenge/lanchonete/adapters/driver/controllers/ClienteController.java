@@ -1,7 +1,7 @@
 package br.com.fiap.techchallenge.lanchonete.adapters.driver.controllers;
 
 import br.com.fiap.techchallenge.lanchonete.adapters.dto.ClienteDTO;
-import br.com.fiap.techchallenge.lanchonete.core.application.usecases.IClienteUseCase;
+import br.com.fiap.techchallenge.lanchonete.core.application.usecases.cliente.IClienteUseCase;
 import br.com.fiap.techchallenge.lanchonete.core.domain.Cliente;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;

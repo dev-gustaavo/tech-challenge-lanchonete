@@ -1,4 +1,4 @@
-package br.com.fiap.techchallenge.lanchonete.core.application.usecases;
+package br.com.fiap.techchallenge.lanchonete.core.application.usecases.cliente;
 
 import br.com.fiap.techchallenge.lanchonete.core.domain.Cliente;
 import br.com.fiap.techchallenge.lanchonete.core.domain.repositories.IClienteRepository;
