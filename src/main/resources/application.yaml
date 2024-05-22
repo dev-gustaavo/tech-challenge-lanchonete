@@ -6,8 +6,8 @@ spring:
       ddl-auto: create-drop
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3307/lanchonete
-#    url: jdbc:mysql://mysql_db:3306/lanchonete
+#    url: jdbc:mysql://localhost:3307/lanchonete
+    url: jdbc:mysql://mysql_db:3306/lanchonete
     username: user
     password: pass
     driver-class-name: com.mysql.cj.jdbc.Driver
