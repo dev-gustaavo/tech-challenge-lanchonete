@@ -3,11 +3,20 @@ package br.com.fiap.techchallenge.lanchonete.core.domain;
 import java.math.BigDecimal;
 
 public class Produto {
+    private Integer id;
     private String nome;
     private CategoriaProduto categoria;
     private BigDecimal preco;
     private String descricao;
     private String imagemPath;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

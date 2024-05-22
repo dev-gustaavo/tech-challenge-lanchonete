@@ -90,5 +90,12 @@ public class ProdutoRepository implements IProdutoRepository {
             throw new Exception(exception.getMessage(), exception);
         }
     }
+
+    @Override
+    public Boolean isProduto(Integer id) {
+        var produtoOptional = repositoryProduto.findById(id);
+
+        return produtoOptional.isPresent();
+    }
 }
 

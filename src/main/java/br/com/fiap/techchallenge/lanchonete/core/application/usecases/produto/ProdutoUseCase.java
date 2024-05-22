@@ -33,4 +33,11 @@ public class ProdutoUseCase implements IProdutoUseCase {
     public List<Produto> buscaProdutoPorCategoria(String categoria) throws Exception {
         return produtoRepository.buscaPorCategoria(categoria);
     }
+
+    @Override
+    public Boolean isProduto(Integer id) {
+        return produtoRepository.isProduto(id);
+    }
+
+
 }

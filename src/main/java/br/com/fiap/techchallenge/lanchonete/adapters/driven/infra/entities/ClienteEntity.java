@@ -7,9 +7,12 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "clientes", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"nome", "cpf"})
-})
+@Table(
+        name = "clientes",
+        uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"cpf"})
+        }
+)
 @Getter
 @Setter
 public class ClienteEntity implements Serializable {

@@ -1,4 +1,4 @@
-package br.com.fiap.techchallenge.lanchonete.adapters.dto;
+package br.com.fiap.techchallenge.lanchonete.adapters.inbound.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

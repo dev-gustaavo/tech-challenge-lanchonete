@@ -1,5 +1,7 @@
 package br.com.fiap.techchallenge.lanchonete.adapters.driven.infra.entities;
 
+import br.com.fiap.techchallenge.lanchonete.core.domain.EtapaPedido;
+import br.com.fiap.techchallenge.lanchonete.core.domain.StatusPagamento;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,13 +18,18 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @OneToOne(optional = true)
-    private ClienteEntity cliente;
-
-    @OneToMany(mappedBy = "pedido")
-    private List<ItemPedidoEntity> itens;
+    @Column
+    private String identificacaoCliente;
 
     @Column(nullable = false)
-    private String etapaPedido;
+    private String etapaPedido = EtapaPedido.RECEBIDO.toString();
 
+    @Column(nullable = false)
+    private String statusPagamento = StatusPagamento.PENDENTE.toString();
+
+    @ElementCollection
+    @CollectionTable(name = "produtos_pedido", joinColumns = @JoinColumn(name = "pedido_id"))
+    @Column(name = "produto_id")
+    private List<Integer> produtoId;
 }
+

@@ -3,24 +3,25 @@ package br.com.fiap.techchallenge.lanchonete.core.domain;
 import java.util.List;
 
 public class Pedido {
-    private Cliente cliente;
-    private List<Produto> itens;
-    private EtapaPedido etapaPedido;
+    private String identificacaoCliente;
+    private List<Integer> produtoId;
+    private EtapaPedido etapaPedido = EtapaPedido.RECEBIDO;
+    private StatusPagamento statusPagamento = StatusPagamento.PENDENTE;
 
-    public Cliente getCliente() {
-        return cliente;
+    public String getIdentificacaoCliente() {
+        return identificacaoCliente;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setIdentificacaoCliente(String identificacaoCliente) {
+        this.identificacaoCliente = identificacaoCliente;
     }
 
-    public List<Produto> getItens() {
-        return itens;
+    public List<Integer> getProdutoId() {
+        return produtoId;
     }
 
-    public void setItens(List<Produto> itens) {
-        this.itens = itens;
+    public void setProdutoId(List<Integer> produtoId) {
+        this.produtoId = produtoId;
     }
 
     public EtapaPedido getEtapaPedido() {
@@ -29,5 +30,13 @@ public class Pedido {
 
     public void setEtapaPedido(EtapaPedido etapaPedido) {
         this.etapaPedido = etapaPedido;
+    }
+
+    public StatusPagamento getStatusPagamento() {
+        return statusPagamento;
+    }
+
+    public void setStatusPagamento(StatusPagamento statusPagamento) {
+        this.statusPagamento = statusPagamento;
     }
 }

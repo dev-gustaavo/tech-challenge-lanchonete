@@ -1,6 +1,7 @@
 package br.com.fiap.techchallenge.lanchonete.adapters.driven.config;
 
 import br.com.fiap.techchallenge.lanchonete.core.domain.ErrorResponse;
+import br.com.fiap.techchallenge.lanchonete.core.domain.exception.ProdutoNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,12 @@ public class CustomExceptionHandler {
     public ResponseEntity<ErrorResponse> handleExceptionGenerica(Exception ex) {
         var errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(ProdutoNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleProdutoNotFoundException(ProdutoNotFoundException ex) {
+        var errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)

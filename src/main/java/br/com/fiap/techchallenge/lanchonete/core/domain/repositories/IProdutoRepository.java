@@ -10,4 +10,5 @@ public interface IProdutoRepository {
     Produto update(Integer id, Produto produto) throws Exception;
     void delete(Integer id) throws Exception;
     List<Produto> buscaPorCategoria(String categoria) throws Exception;
+    Boolean isProduto(Integer id);
 }

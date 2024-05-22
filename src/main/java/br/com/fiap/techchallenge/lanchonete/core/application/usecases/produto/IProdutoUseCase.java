@@ -11,4 +11,5 @@ public interface IProdutoUseCase {
     void delete(int id) throws Exception;
 
     List<Produto> buscaProdutoPorCategoria(String categoria) throws Exception;
+    Boolean isProduto(Integer id);
 }

@@ -1,4 +1,4 @@
-package br.com.fiap.techchallenge.lanchonete.adapters.dto;
+package br.com.fiap.techchallenge.lanchonete.adapters.inbound.dto;
 
 import br.com.fiap.techchallenge.lanchonete.core.domain.CategoriaProduto;
 import jakarta.validation.constraints.NotBlank;

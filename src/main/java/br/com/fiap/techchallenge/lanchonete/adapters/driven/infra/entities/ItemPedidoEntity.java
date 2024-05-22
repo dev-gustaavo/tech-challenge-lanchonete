@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "itens_pedido")
 @Getter
@@ -15,8 +17,11 @@ public class ItemPedidoEntity {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name = "pedido_id", referencedColumnName = "id")
     private PedidoEntity pedido;
 
-    @ManyToOne
-    private ProdutoEntity produto;
+    @ElementCollection
+    @CollectionTable(name = "produtos_pedido", joinColumns = @JoinColumn(name = "pedido_id"))
+    @Column(name = "produto_id")
+    private List<Integer> produtoId;
 }

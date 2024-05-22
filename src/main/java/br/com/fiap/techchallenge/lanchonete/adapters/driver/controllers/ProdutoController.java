@@ -1,6 +1,6 @@
 package br.com.fiap.techchallenge.lanchonete.adapters.driver.controllers;
 
-import br.com.fiap.techchallenge.lanchonete.adapters.dto.ProdutoDTO;
+import br.com.fiap.techchallenge.lanchonete.adapters.inbound.dto.ProdutoDTO;
 import br.com.fiap.techchallenge.lanchonete.core.application.usecases.produto.IProdutoUseCase;
 import br.com.fiap.techchallenge.lanchonete.core.domain.Produto;
 import com.fasterxml.jackson.databind.ObjectMapper;
