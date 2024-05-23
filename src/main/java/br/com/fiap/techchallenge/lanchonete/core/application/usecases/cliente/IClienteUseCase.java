@@ -1,4 +1,4 @@
-package br.com.fiap.techchallenge.lanchonete.core.application.usecases;
+package br.com.fiap.techchallenge.lanchonete.core.application.usecases.cliente;
 
 import br.com.fiap.techchallenge.lanchonete.core.domain.Cliente;
 
@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface IClienteUseCase {
 
-    Cliente save(Cliente cliente);
+    Cliente save(Cliente cliente) throws Exception;
+
+    Cliente buscarClientePorCpf(String cpf) throws Exception;
 
     List<Cliente> list();
 

@@ -5,17 +5,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
-@Table(
-        name = "clientes",
-        uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"cpf"})
-        }
-)
+@Table(name = "produtos", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"nome", "categoria"})
+})
 @Getter
 @Setter
-public class ClienteEntity implements Serializable {
+public class ProdutoEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -25,8 +23,14 @@ public class ClienteEntity implements Serializable {
     private String nome;
 
     @Column(nullable = false)
-    private String email;
+    private String categoria;
 
     @Column(nullable = false)
-    private String cpf;
+    private BigDecimal preco;
+
+    @Column(nullable = false)
+    private String descricao;
+
+    @Column(nullable = false)
+    private String imagemPath;
 }

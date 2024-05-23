@@ -1,14 +1,11 @@
-version: '3'
+version: '3.8'
 services:
 
   lanchonete_app:
-    image: lanchonete-app
-    container_name: lanchonete-app
     build: .
+    container_name: lanchonete-app
     ports:
       - 8080:8080
-    expose:
-      - 8080
     networks:
       - lanchonete-network
     depends_on:
@@ -26,6 +23,11 @@ services:
       MYSQL_DATABASE: lanchonete
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppass"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
 networks:
   lanchonete-network:
