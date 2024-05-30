@@ -4,15 +4,14 @@ services:
   lanchonete_app:
     build: .
     container_name: lanchonete-app
-    image: gtbarbosa/fiap-tech-challenge-lanchonete:latest
     ports:
       - 8080:8080
     networks:
       - lanchonete-network
     depends_on:
-      - mysql-db
+      - mysql_db
 
-  mysql-db:
+  mysql_db:
     image: mysql:8
     container_name: mysql-lanchonete-db
     ports:
