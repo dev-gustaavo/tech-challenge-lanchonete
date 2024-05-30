@@ -12,7 +12,7 @@ spec:
         - containerPort: 8080
       env:
         - name: SPRING_DATASOURCE_URL
-          value: jdbc:mysql://192.168.49.2:3306/lanchonete
+          value: jdbc:mysql://mysql-db:3306/lanchonete
         - name: SPRING_DATASOURCE_USERNAME
           value: user
         - name: SPRING_DATASOURCE_PASSWORD
