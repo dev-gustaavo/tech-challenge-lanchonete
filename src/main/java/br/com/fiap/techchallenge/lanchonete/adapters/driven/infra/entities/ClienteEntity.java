@@ -7,12 +7,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity
-@Table(
-        name = "clientes",
-        uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"cpf"})
-        }
-)
+@Table(name = "clientes")
 @Getter
 @Setter
 public class ClienteEntity implements Serializable {
@@ -21,10 +16,10 @@ public class ClienteEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column
     private String nome;
 
-    @Column(nullable = false)
+    @Column
     private String email;
 
     @Column(nullable = false)

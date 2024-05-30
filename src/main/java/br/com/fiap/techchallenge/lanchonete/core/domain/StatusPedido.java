@@ -1,6 +1,6 @@
 package br.com.fiap.techchallenge.lanchonete.core.domain;
 
-public enum EtapaPedido {
+public enum StatusPedido {
     RECEBIDO(1),
     EM_PREPARACAO(2),
     PRONTO(3),
@@ -8,7 +8,7 @@ public enum EtapaPedido {
 
     private final int codigo;
 
-    EtapaPedido(int codigo) {
+    StatusPedido(int codigo) {
         this.codigo = codigo;
     }
 }

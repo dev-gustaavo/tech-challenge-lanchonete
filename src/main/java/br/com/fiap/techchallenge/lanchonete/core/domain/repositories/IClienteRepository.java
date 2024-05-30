@@ -8,8 +8,6 @@ public interface IClienteRepository {
 
     Cliente save(Cliente cliente) throws Exception;
 
-    Cliente buscarClientePorCpf(String cpf) throws Exception;
-
     List<Cliente> list();
 
     Cliente updateCliente(Integer id, Cliente cliente);

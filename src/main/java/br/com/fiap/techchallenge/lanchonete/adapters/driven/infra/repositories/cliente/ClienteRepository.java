@@ -33,23 +33,6 @@ public class ClienteRepository implements IClienteRepository {
     }
 
     @Override
-    public Cliente buscarClientePorCpf(String cpf) throws Exception {
-        try {
-            var clienteEntityOptional = repositoryCliente.findByCpf(cpf);
-
-            if (clienteEntityOptional.isPresent())
-                return mapper.convertValue(clienteEntityOptional.get(), Cliente.class);
-
-            throw new EntityNotFoundException(String.format("Cliente não encontrado para o cpf %s", cpf));
-
-        } catch (EntityNotFoundException entityNotFoundException) {
-            throw new EntityNotFoundException(entityNotFoundException.getLocalizedMessage(), entityNotFoundException);
-        } catch (Exception exception) {
-            throw new Exception(exception.getMessage(), exception);
-        }
-    }
-
-    @Override
     public List<Cliente> list() {
         var clienteEntities = repositoryCliente.findAll();
         var clientes = clienteEntities.stream()

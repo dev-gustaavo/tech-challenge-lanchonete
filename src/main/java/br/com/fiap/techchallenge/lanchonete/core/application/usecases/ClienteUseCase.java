@@ -1,8 +1,7 @@
-package br.com.fiap.techchallenge.lanchonete.core.application.usecases.cliente;
+package br.com.fiap.techchallenge.lanchonete.core.application.usecases;
 
 import br.com.fiap.techchallenge.lanchonete.core.domain.Cliente;
 import br.com.fiap.techchallenge.lanchonete.core.domain.repositories.IClienteRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,22 +14,8 @@ public class ClienteUseCase implements IClienteUseCase {
     private final IClienteRepository clienteRepository;
 
     @Override
-    public Cliente save(Cliente cliente) throws Exception {
-
-        try {
-            clienteRepository.buscarClientePorCpf(cliente.getCpf());
-
-            throw new Exception("Cliente já cadastrado.");
-        } catch (EntityNotFoundException entityNotFoundException) {
-            return clienteRepository.save(cliente);
-        } catch (Exception exception) {
-            throw new Exception(exception.getMessage(), exception);
-        }
-    }
-
-    @Override
-    public Cliente buscarClientePorCpf(String cpf) throws Exception {
-        return clienteRepository.buscarClientePorCpf(cpf);
+    public Cliente save(Cliente cliente) {
+        return clienteRepository.save(cliente);
     }
 
     @Override
