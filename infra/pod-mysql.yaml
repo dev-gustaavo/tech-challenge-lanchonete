@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-db
+  labels:
+    app: mysql-db
+spec:
+  containers:
+    - name: mysql
+      image: mysql:8
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: pass
+        - name: MYSQL_DATABASE
+          value: lanchonete
+        - name: MYSQL_USER
+          value: user
+        - name: MYSQL_PASSWORD
+          value: pass
+      ports:
+        - containerPort: 3306
+      readinessProbe:
+        exec:
+          command: ["sh", "-c", "mysqladmin ping -h 127.0.0.1 -u root -ppass"]
+        initialDelaySeconds: 30
+        periodSeconds: 10

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lanchonete-api
+  labels:
+    app: lanchonete-api
+spec:
+  containers:
+    - name: lanchonete-api
+      image: gtbarbosa/fiap-tech-challenge-lanchonete:latest
+      ports:
+        - containerPort: 8080
+      env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://mysql-db:3306/lanchonete
+        - name: SPRING_DATASOURCE_USERNAME
+          value: user
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: pass
