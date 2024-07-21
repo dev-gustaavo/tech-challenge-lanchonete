@@ -1,17 +1,15 @@
 spring:
   application:
-    name: lanchonete
+    name: ${APP_NAME:lanchonete}
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    show-sql: true
+      ddl-auto: ${DDL_AUTO:create-drop}
+    show-sql: ${SHOW_SQL:true}
   datasource:
-#    url: jdbc:mysql://localhost:3307/lanchonete
-#    url: jdbc:mysql://mysql-db:3306/lanchonete
-    url: jdbc:mysql://192.168.49.2:3306/lanchonete
-    username: user
-    password: pass
+    url: ${URL_DATABASE:jdbc:mysql://localhost:32700/lanchonete}
+    username: ${USER_DATABASE:user}
+    password: ${PASSWORD_DATABASE:pass}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 server:
-  port: 8080
+  port: ${APP_PORT:8080}
