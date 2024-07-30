@@ -24,6 +24,12 @@ kubectl apply -f banco_dados/ # você vai aplicar os arquivos necessários para 
 kubectl apply -f aplicacao/   # você vai aplicar os arquivos necessários para subir a aplicação
 ```
 
+### Obs.: Caso esteja utilizando o minikube para rodar seu cluster local, é necessário executar o campo abaixo:
+```bash
+kubectl get svc # neste comando você listará todas as services. Localize a service do app (svc-lanchonete-app)
+kubectl port-forward svc-lanchonete-app 8080:80 # neste comando você vai direcionar todas as chamadas da porta 8080 para a porta 80 do cluster
+```
+
 #### Após os passos acima, a API estará funcionando e será possível realizar as operações, conforme descrito abaixo.
 
 # Passo a passo funcional da API
