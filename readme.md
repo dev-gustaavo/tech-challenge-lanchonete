@@ -56,3 +56,7 @@ informando o número do pedido gerado anteriormente
 Link da documentação com o desenho do DDD: [Clique aqui para acessar o Miro](https://miro.com/app/board/uXjVKHPTdLg=/?share_link_id=544608334788)
 <br>
 Após subir a aplicação, para acessar o Swagger [Clique aqui](http://localhost:8080/swagger-ui/index.html)
+
+# Desenho de arquitetura do projeto
+
+![](arquitetura/tech-challenge-fiap-fase-2.png)
