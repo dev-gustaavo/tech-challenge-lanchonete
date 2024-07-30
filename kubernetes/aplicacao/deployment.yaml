@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-lanchonete-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pod-lanchonete-app
+  template:
+    metadata:
+      labels:
+        app: pod-lanchonete-app
+    spec:
+      containers:
+        - name: container-lanchonete-app
+          image: gtbarbosa/fiap-tech-challenge-lanchonete
+          env:
+            - name: APP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-configmap
+                  key: APP_NAME
+            - name: DDL_AUTO
+              valueFrom:
+                configMapKeyRef:
+                  name: app-configmap
+                  key: DDL_AUTO
+            - name: SHOW_SQL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-configmap
+                  key: SHOW_SQL
+            - name: URL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-configmap
+                  key: URL_DATABASE
+            - name: USER_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-configmap
+                  key: USER_DATABASE
+            - name: APP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-configmap
+                  key: APP_PORT
+            - name: PASSWORD_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "1000m"
+            limits:
+              cpu: "1200m"

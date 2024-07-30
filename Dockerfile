@@ -23,6 +23,6 @@ RUN apt-get update && apt-get install -y curl \
     && curl -o /app/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh \
     && chmod +x /app/wait-for-it.sh
 
-ENTRYPOINT ["/app/wait-for-it.sh", "mysql_db:3306", "--", "java", "-jar", "/app/lanchonete-app.jar"]
+ENTRYPOINT ["/app/wait-for-it.sh", "svc-mysql-db:3306", "--", "java", "-jar", "/app/lanchonete-app.jar"]
 
 EXPOSE 8080

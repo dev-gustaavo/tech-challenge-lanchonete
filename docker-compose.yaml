@@ -4,30 +4,31 @@ services:
   lanchonete_app:
     build: .
     container_name: lanchonete-app
+    image: gtbarbosa/fiap-tech-challenge-lanchonete:latest
     ports:
       - 8080:8080
     networks:
       - lanchonete-network
-    depends_on:
-      - mysql_db
+#    depends_on:
+#      - mysql-db
 
-  mysql_db:
-    image: mysql:8
-    container_name: mysql-lanchonete-db
-    ports:
-      - 3307:3306
-    networks:
-      - lanchonete-network
-    environment:
-      MYSQL_ROOT_PASSWORD: pass
-      MYSQL_DATABASE: lanchonete
-      MYSQL_USER: user
-      MYSQL_PASSWORD: pass
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppass"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+#  mysql-db:
+#    image: mysql:8
+#    container_name: mysql-lanchonete-db
+#    ports:
+#      - 3307:3306
+#    networks:
+#      - lanchonete-network
+#    environment:
+#      MYSQL_ROOT_PASSWORD: pass
+#      MYSQL_DATABASE: lanchonete
+#      MYSQL_USER: user
+#      MYSQL_PASSWORD: pass
+#    healthcheck:
+#      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppass"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 3
 
 networks:
   lanchonete-network:

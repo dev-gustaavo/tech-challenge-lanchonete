@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-configmap
+data:
+  APP_NAME: lanchonete
+  DDL_AUTO: create-drop
+  SHOW_SQL: "true"
+  URL_DATABASE: jdbc:mysql://svc-mysql-db:3306/lanchonete
+  USER_DATABASE: user
+  APP_PORT: "8080"
+  MYSQL_DATABASE: lanchonete
+  MYSQL_USER: user
