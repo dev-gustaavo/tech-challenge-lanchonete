@@ -1,0 +1,17 @@
+name: Build, test & publish
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build
+        uses: gradle clean build
