@@ -5,6 +5,7 @@ import br.com.fiap.techchallenge.lanchonete.entities.StatusPagamento;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @Table(name = "pedidos")
 @Getter
 @Setter
+@Accessors(chain = true)
 public class PedidoEntity {
 
     @Id

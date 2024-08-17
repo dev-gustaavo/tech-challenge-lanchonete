@@ -4,11 +4,19 @@ import br.com.fiap.techchallenge.lanchonete.entities.CategoriaProduto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Accessors(chain = true)
 public class ProdutoDTO {
 
     private Integer id;
@@ -31,12 +39,4 @@ public class ProdutoDTO {
     @NotNull(message = "Defina uma imagem para o produto")
     @NotBlank(message = "Defina uma imagem para o produto")
     private String imagemPath;
-
-    public CategoriaProduto getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = CategoriaProduto.fromString(categoria);
-    }
 }

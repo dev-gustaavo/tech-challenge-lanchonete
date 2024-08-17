@@ -2,9 +2,17 @@ package br.com.fiap.techchallenge.lanchonete.dtos.inbound;
 
 import br.com.fiap.techchallenge.lanchonete.entities.StatusPagamento;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
-@Data
+@Getter
+@Setter
+@Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class WebhookDTO {
 
     @NotNull(message = "O número do pedido é obrigatório.")

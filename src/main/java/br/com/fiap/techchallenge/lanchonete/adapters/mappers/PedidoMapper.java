@@ -14,8 +14,13 @@ public interface PedidoMapper {
 
     PedidoMapper INSTANCE = Mappers.getMapper(PedidoMapper.class);
 
+    @Mapping(target = "numero", ignore = true)
+    @Mapping(target = "etapaPedido", ignore = true)
+    @Mapping(target = "statusPagamento", ignore = true)
     Pedido toEntity(PedidoDTO pedidoRequest);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
     PedidoEntity toDbEntity(Pedido pedido);
 
     @Mapping(source = "id", target = "numero")
@@ -27,5 +32,8 @@ public interface PedidoMapper {
     PedidoResponse toResponse(Pedido pedido);
 
     @Mapping(source = "numeroPedido", target = "numero")
+    @Mapping(target = "identificacaoCliente", ignore = true)
+    @Mapping(target = "produtoId", ignore = true)
+    @Mapping(target = "etapaPedido", ignore = true)
     Pedido fromWebhookToPedido(WebhookDTO webhookDTO);
 }
