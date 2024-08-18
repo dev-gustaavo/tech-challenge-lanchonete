@@ -26,4 +26,14 @@ public class ProdutoMock {
                 .setPreco(BigDecimal.valueOf(10))
                 .setImagemPath("path");
     }
+
+    public static Produto getProdutoSemId() {
+        return new Produto()
+                .setId(null)
+                .setNome("produto")
+                .setDescricao("descricao")
+                .setCategoria(CategoriaProduto.LANCHE)
+                .setPreco(BigDecimal.valueOf(10))
+                .setImagemPath("path");
+    }
 }

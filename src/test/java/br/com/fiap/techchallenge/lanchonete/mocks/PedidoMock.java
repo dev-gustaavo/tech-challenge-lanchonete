@@ -43,4 +43,22 @@ public class PedidoMock {
                 .setProdutoId(null)
                 .setStatusPagamento(StatusPagamento.PENDENTE);
     }
+
+    public static Pedido getPedidoListaProdutoVazia() {
+        return new Pedido()
+                .setEtapaPedido(EtapaPedido.RECEBIDO)
+                .setNumero(1)
+                .setIdentificacaoCliente("01234567890")
+                .setProdutoId(List.of())
+                .setStatusPagamento(StatusPagamento.PENDENTE);
+    }
+
+    public static Pedido getPedidoPago() {
+        return new Pedido()
+                .setEtapaPedido(EtapaPedido.RECEBIDO)
+                .setNumero(1)
+                .setIdentificacaoCliente("01234567890")
+                .setProdutoId(List.of(1, 2))
+                .setStatusPagamento(StatusPagamento.PAGO);
+    }
 }

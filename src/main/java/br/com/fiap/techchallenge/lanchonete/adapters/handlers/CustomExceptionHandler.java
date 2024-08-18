@@ -1,5 +1,6 @@
 package br.com.fiap.techchallenge.lanchonete.adapters.handlers;
 
+import br.com.fiap.techchallenge.lanchonete.entities.ErrorProdutoInexistenteResponse;
 import br.com.fiap.techchallenge.lanchonete.entities.ErrorResponse;
 import br.com.fiap.techchallenge.lanchonete.entities.exception.ProdutoException;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,9 +25,15 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler(ProdutoException.class)
-    public ResponseEntity<ErrorResponse> handleProdutoNotFoundException(ProdutoException ex) {
-        var errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> handleProdutoNotFoundException(ProdutoException ex) {
+        if (ex.getIdProdutos().isEmpty()) {
+            var errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
+
+        var errorProdutoInexistenteResponse = new ErrorProdutoInexistenteResponse(HttpStatus.NOT_FOUND.value(),
+                ex.getMessage(), ex.getIdProdutos());
+        return new ResponseEntity<>(errorProdutoInexistenteResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
