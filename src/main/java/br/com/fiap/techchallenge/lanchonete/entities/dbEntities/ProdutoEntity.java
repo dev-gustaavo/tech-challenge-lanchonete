@@ -3,6 +3,7 @@ package br.com.fiap.techchallenge.lanchonete.entities.dbEntities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 })
 @Getter
 @Setter
+@Accessors(chain = true)
 public class ProdutoEntity implements Serializable {
 
     @Id

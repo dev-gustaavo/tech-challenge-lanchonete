@@ -16,4 +16,6 @@ public interface ProdutoMapper {
     ProdutoEntity toDbEntity(Produto produto);
 
     Produto fromDbEntityToEntity(ProdutoEntity produtoEntity);
+
+    ProdutoEntity toProdutoEntityAtualizado(Produto produto);
 }

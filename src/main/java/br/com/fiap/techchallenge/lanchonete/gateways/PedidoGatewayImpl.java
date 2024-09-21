@@ -7,7 +7,6 @@ import br.com.fiap.techchallenge.lanchonete.entities.Pedido;
 import br.com.fiap.techchallenge.lanchonete.entities.StatusPagamento;
 import br.com.fiap.techchallenge.lanchonete.entities.dbEntities.PedidoEntity;
 import br.com.fiap.techchallenge.lanchonete.interfaces.dbconnection.RepositoryPedido;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
 public class PedidoGatewayImpl implements br.com.fiap.techchallenge.lanchonete.interfaces.gateways.PedidoGateway {
 
     private final RepositoryPedido repositoryPedido;
-    private final ObjectMapper mapper;
     private final PedidoMapper pedidoMapper;
 
 
@@ -41,13 +39,14 @@ public class PedidoGatewayImpl implements br.com.fiap.techchallenge.lanchonete.i
         try {
             var pedidosPagosOptional = repositoryPedido.listPedidosOrdenadoPorStatus();
 
-            if (pedidosPagosOptional.isPresent())
-                return pedidosPagosOptional.get()
+            if (pedidosPagosOptional.isEmpty())
+                throw new EntityNotFoundException(String.format("Nenhum pedido com o status %s", StatusPagamento.PAGO));
+
+            return pedidosPagosOptional.get()
                     .stream()
                     .map(pedidoMapper::fromDbEntityToEntity)
                     .collect(Collectors.toList());
 
-            throw new EntityNotFoundException(String.format("Nenhum pedido com o status %s", StatusPagamento.PAGO));
         } catch (EntityNotFoundException entityNotFoundException) {
             throw new EntityNotFoundException(entityNotFoundException.getLocalizedMessage(), entityNotFoundException);
         } catch (Exception exception) {
@@ -71,11 +70,14 @@ public class PedidoGatewayImpl implements br.com.fiap.techchallenge.lanchonete.i
     }
 
     private PedidoEntity alteraStatusPagamentoParaPago(Optional<PedidoEntity> pedidoDbEntityOptional) {
+
+        if (pedidoDbEntityOptional.isEmpty())
+            throw new EntityNotFoundException();
+
         var pedidoDbEntity = pedidoDbEntityOptional.get();
-
-        pedidoDbEntity.setStatusPagamento(StatusPagamento.PAGO.toString());
-        pedidoDbEntity.setEtapaPedido(EtapaPedido.EM_PREPARACAO.toString());
-
+        pedidoDbEntity = pedidoMapper.toStatusPagoAndEtapaPedidoEmPreparacao(
+                StatusPagamento.PAGO, EtapaPedido.EM_PREPARACAO
+        );
         return repositoryPedido.save(pedidoDbEntity);
     }
 
