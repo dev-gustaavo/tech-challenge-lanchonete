@@ -264,4 +264,23 @@ public class PedidoMapperTest {
                 () -> assertEquals(result.getStatusPagamento(), webhookDTOMock.getStatusPagamento())
         );
     }
+
+    @Test
+    @Description("Deve retornar null quando StatusPagamento e EtapaPedido forem null")
+    void deveRetornarNullStatusPagamentoEtapaPedidoNull() {
+        assertNull(pedidoMapper.toStatusPagoAndEtapaPedidoEmPreparacao(null, null));
+    }
+
+    @Test
+    @Description("Deve retornar PedidoEntity quando StatusPagamento e EtapaPedido preenchidos")
+    void deveRetornarPedidoEntityStatusPagamentoEtapaPedidoPreenchidos() {
+        var result = pedidoMapper.toStatusPagoAndEtapaPedidoEmPreparacao(
+                StatusPagamento.PAGO, EtapaPedido.EM_PREPARACAO
+        );
+
+        assertAll(
+                () -> assertEquals(result.getStatusPagamento(), StatusPagamento.PAGO.toString()),
+                () -> assertEquals(result.getEtapaPedido(), EtapaPedido.EM_PREPARACAO.toString())
+        );
+    }
 }

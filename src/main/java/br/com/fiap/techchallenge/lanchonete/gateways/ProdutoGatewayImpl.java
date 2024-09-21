@@ -2,10 +2,9 @@ package br.com.fiap.techchallenge.lanchonete.gateways;
 
 import br.com.fiap.techchallenge.lanchonete.adapters.mappers.ProdutoMapper;
 import br.com.fiap.techchallenge.lanchonete.entities.MensagemErroPadrao;
+import br.com.fiap.techchallenge.lanchonete.entities.Produto;
 import br.com.fiap.techchallenge.lanchonete.entities.dbEntities.ProdutoEntity;
 import br.com.fiap.techchallenge.lanchonete.interfaces.dbconnection.RepositoryProduto;
-import br.com.fiap.techchallenge.lanchonete.entities.Produto;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,6 @@ import java.util.stream.Collectors;
 public class ProdutoGatewayImpl implements br.com.fiap.techchallenge.lanchonete.interfaces.gateways.ProdutoGateway {
 
     private final RepositoryProduto repositoryProduto;
-    private final ObjectMapper mapper;
     private final ProdutoMapper produtoMapper;
 
     @Override
@@ -50,13 +48,12 @@ public class ProdutoGatewayImpl implements br.com.fiap.techchallenge.lanchonete.
     }
 
     private ProdutoEntity aplicaAlteracoes(Produto produto, Optional<ProdutoEntity> produtoEntityOptional) {
-        var produtoEntity = produtoEntityOptional.get();
 
-        produtoEntity.setNome(produto.getNome());
-        produtoEntity.setCategoria(produto.getCategoria().toString());
-        produtoEntity.setPreco(produto.getPreco());
-        produtoEntity.setDescricao(produto.getDescricao());
-        produtoEntity.setImagemPath(produto.getImagemPath());
+        if (produtoEntityOptional.isEmpty())
+            throw new EntityNotFoundException();
+
+        var produtoEntity = produtoEntityOptional.get();
+        produtoEntity = produtoMapper.toProdutoEntityAtualizado(produto);
 
         return repositoryProduto.save(produtoEntity);
     }
@@ -75,14 +72,13 @@ public class ProdutoGatewayImpl implements br.com.fiap.techchallenge.lanchonete.
         try {
             var produtoEntityOptional = repositoryProduto.findByCategoria(categoria);
 
-            if (produtoEntityOptional.isPresent()) {
-                return produtoEntityOptional.get()
-                        .stream()
-                        .map(produtoMapper::fromDbEntityToEntity)
-                        .collect(Collectors.toList());
-            }
+            if (produtoEntityOptional.isEmpty())
+                throw new EntityNotFoundException(String.format(MensagemErroPadrao.PRODUTO_NAO_ENCONTRADO_CATEGORIA, categoria));
 
-            throw new EntityNotFoundException(String.format(MensagemErroPadrao.PRODUTO_NAO_ENCONTRADO_CATEGORIA, categoria));
+            return produtoEntityOptional.get()
+                    .stream()
+                    .map(produtoMapper::fromDbEntityToEntity)
+                    .collect(Collectors.toList());
         } catch (EntityNotFoundException entityNotFoundException) {
             throw new EntityNotFoundException(entityNotFoundException.getLocalizedMessage(), entityNotFoundException);
         } catch (Exception exception) {

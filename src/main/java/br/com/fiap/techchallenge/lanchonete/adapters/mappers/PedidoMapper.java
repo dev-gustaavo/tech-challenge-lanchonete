@@ -3,7 +3,9 @@ package br.com.fiap.techchallenge.lanchonete.adapters.mappers;
 import br.com.fiap.techchallenge.lanchonete.dtos.inbound.PedidoDTO;
 import br.com.fiap.techchallenge.lanchonete.dtos.inbound.WebhookDTO;
 import br.com.fiap.techchallenge.lanchonete.dtos.outbound.PedidoResponse;
+import br.com.fiap.techchallenge.lanchonete.entities.EtapaPedido;
 import br.com.fiap.techchallenge.lanchonete.entities.Pedido;
+import br.com.fiap.techchallenge.lanchonete.entities.StatusPagamento;
 import br.com.fiap.techchallenge.lanchonete.entities.dbEntities.PedidoEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -36,4 +38,12 @@ public interface PedidoMapper {
     @Mapping(target = "produtoId", ignore = true)
     @Mapping(target = "etapaPedido", ignore = true)
     Pedido fromWebhookToPedido(WebhookDTO webhookDTO);
+
+    @Mapping(target = "statusPagamento", expression = "java(statusPagamento.toString())")
+    @Mapping(target = "etapaPedido", expression = "java(etapaPedido.toString())")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "identificacaoCliente", ignore = true)
+    @Mapping(target = "produtoId", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    PedidoEntity toStatusPagoAndEtapaPedidoEmPreparacao(StatusPagamento statusPagamento, EtapaPedido etapaPedido);
 }

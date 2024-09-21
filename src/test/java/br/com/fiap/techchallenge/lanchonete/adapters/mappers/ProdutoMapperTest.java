@@ -121,4 +121,40 @@ public class ProdutoMapperTest {
                 () -> assertEquals(result.getImagemPath(), produtoEntityCategoriaNullMock.getImagemPath())
         );
     }
+
+    @Test
+    @Description("Deve retornar null quando Produto for null")
+    void deveRetornarNullQuandoProdutoNull() {
+        assertNull(produtoMapper.toProdutoEntityAtualizado(null));
+    }
+
+    @Test
+    @Description("Deve retornar ProdutoEntity quando Produto for preenchido")
+    void deveRetornarProdutoEntityQuandoProdutoPreenchido() {
+        var result = produtoMapper.toProdutoEntityAtualizado(produtoMock);
+        assertAll(
+                () -> assertNotNull(result),
+                () -> assertEquals(result.getId(), produtoMock.getId()),
+                () -> assertEquals(result.getNome(), produtoMock.getNome()),
+                () -> assertEquals(result.getCategoria(), produtoMock.getCategoria().toString()),
+                () -> assertEquals(result.getPreco(), produtoMock.getPreco()),
+                () -> assertEquals(result.getDescricao(), produtoMock.getDescricao()),
+                () -> assertEquals(result.getImagemPath(), produtoMock.getImagemPath())
+        );
+    }
+
+    @Test
+    @Description("Deve retornar ProdutoEntity com categoria null")
+    void deveRetornarProdutoEntityCategoriaNull() {
+        var result = produtoMapper.toProdutoEntityAtualizado(produtoCategoriaNullMock);
+        assertAll(
+                () -> assertNotNull(result),
+                () -> assertEquals(result.getId(), produtoCategoriaNullMock.getId()),
+                () -> assertEquals(result.getNome(), produtoCategoriaNullMock.getNome()),
+                () -> assertNull(result.getCategoria()),
+                () -> assertEquals(result.getPreco(), produtoCategoriaNullMock.getPreco()),
+                () -> assertEquals(result.getDescricao(), produtoCategoriaNullMock.getDescricao()),
+                () -> assertEquals(result.getImagemPath(), produtoCategoriaNullMock.getImagemPath())
+        );
+    }
 }

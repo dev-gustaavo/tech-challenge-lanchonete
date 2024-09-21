@@ -91,15 +91,12 @@ public class ClienteGatewayImpl implements ClienteGateway {
     }
 
     private ClienteEntity aplicaAlteracoes(Cliente cliente, Optional<ClienteEntity> clienteEntityOptional) {
+        if (clienteEntityOptional.isEmpty())
+            throw new EntityNotFoundException();
 
-        if (clienteEntityOptional.isPresent()) {
-            var clienteEntity = clienteEntityOptional.get();
-
-            clienteEntity = clienteMapper.toDbEntity(cliente);
-
-            return repositoryCliente.save(clienteEntity);
-        }
-        throw new EntityNotFoundException();
+        var clienteEntity = clienteEntityOptional.get();
+        clienteEntity = clienteMapper.toDbEntity(cliente);
+        return repositoryCliente.save(clienteEntity);
     }
 }
 
